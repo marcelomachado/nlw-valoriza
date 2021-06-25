@@ -12,11 +12,10 @@ class AuthenticateUserService {
 		const usersRepositories = getCustomRepository(UsersRepositories);
 
 		const user = await usersRepositories.findOne({email});
-
+		
 		if(!user){
 			throw new Error("Email/Password incorrect.");
 		}
-
 		const passwordMatch= await compare(password, user.password);
 		if(! passwordMatch)
 		{
@@ -27,7 +26,7 @@ class AuthenticateUserService {
 			{
 				email: user.email
 			}, 
-			"", 
+			"a", 
 			{
 				subject: user.id, 
 				expiresIn: "1d"
